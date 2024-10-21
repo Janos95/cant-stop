@@ -4,7 +4,7 @@ A digital implementation of the classic board game "Can't Stop" by Sid Sackson.
 
 ## Play the Game
 
-[Try the game here](https://your-game-url.com)
+[Try the game here](https://janos95.github.io/cant-stop/)
 
 ## About the Game
 
