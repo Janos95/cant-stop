@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can't Stop Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        #game-board {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .column {
+            width: 40px;
+            height: 450px;
+            margin: 0 5px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .space {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #bbb;
+            margin: 2px 0;
+            border-radius: 50%;
+        }
+        #controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #move-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 300px;
+        }
+        #winner-message {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        #fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('fireworks.gif') no-repeat center center;
+            background-size: cover;
+            display: none;
+            z-index: 1000;
+        }
+        #dice-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .die {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            margin: 0 5px;
+        }
+        .column-number {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Can't Stop Game</h1>
+    <div id="dice-container"></div>
+    <div id="game-board"></div>
+    <div id="controls">
+        <div id="move-buttons"></div>
+        <button id="continue-button" style="display: none;">Continue Turn</button>
+        <button id="end-turn-button" style="display: none;">End Turn</button>
+    </div>
+    <div id="winner-message"></div>
+    <div id="fireworks"></div>
+    <script src="main.js"></script>
+    <script>
+        // Create game board
+        const gameBoard = document.getElementById('game-board');
+        for (let i = 2; i <= 12; i++) {
+            const columnContainer = document.createElement('div');
+            columnContainer.style.display = 'flex';
+            columnContainer.style.flexDirection = 'column';
+            columnContainer.style.alignItems = 'center';
+
+            const column = document.createElement('div');
+            column.className = 'column';
+            column.id = `column-${i}`;
+            const spaces = getColumnSpaces(i);
+            for (let j = 0; j < spaces; j++) {
+                const space = document.createElement('div');
+                space.className = 'space';
+                column.appendChild(space);
+            }
+            columnContainer.appendChild(column);
+
+            const columnNumber = document.createElement('div');
+            columnNumber.className = 'column-number';
+            columnNumber.textContent = i;
+            columnContainer.appendChild(columnNumber);
+
+            gameBoard.appendChild(columnContainer);
+        }
+
+        // Start the game
+        playGame(2);
+    </script>
+</body>
+</html>
